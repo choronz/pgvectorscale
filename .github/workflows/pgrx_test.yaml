@@ -18,8 +18,8 @@ jobs:
         platform:
           - type: amd64
             runs_on: ubuntu-22.04
-#          - type: arm64
-#            runs_on: cloud-image-runner-arm64
+          - type: arm64
+            runs_on: ubuntu-22.04
 
     env:
       PG_SRC_DIR: pgbuild
@@ -28,7 +28,6 @@ jobs:
       PG_CONFIG_PATH: postgresql/bin/pg_config
       TAG: ${{ github.event.inputs.tag }}
       TAG_DIR: pgvectorscale
-      TAG_GIT_REF: ${{ github.event.inputs.TAG_GIT_REF == '' && github.event.inputs.tag || github.event.inputs.TAG_GIT_REF}}
 
     steps:
     - name: Checkout pgvectorscale
