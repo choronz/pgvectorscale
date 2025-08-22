@@ -57,12 +57,12 @@ jobs:
         pg-src-dir: ~/${{ env.PG_SRC_DIR }}
         pg-install-dir: ~/${{ env.PG_INSTALL_DIR }}
 
-#    - name: Checkout pgvectorscale  # Checkout ${{ env.TAG }}
-#      uses: actions/checkout@v4
-#      with:
-#        repository: choronz/pgvectorscale
-#        ref: main
-#        path: ${{ env.TAG_DIR }}
+    - name: Checkout pgvectorscale  # Checkout ${{ env.TAG }}
+      uses: actions/checkout@v4
+      with:
+        repository: choronz/pgvectorscale
+        ref: main
+        path: ${{ env.TAG_DIR }}
 
     - name: Install pgrx
       uses: ./.github/actions/install-pgrx
