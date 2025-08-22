@@ -25,7 +25,7 @@ PG_REGRESS_OPTS_EXTRA=--create-role=superuser,tsdbadmin,test_role_1  --launcher=
 export TEST_OUTPUT_DIR:=$(ROOTDIR)/test_output
 export PG_ABS_SRCDIR:=$(ROOTDIR)/test
 export TEST_DBNAME:=regression
-export RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f"
+# export RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f"
 
 ### default collation settings on Cloud is C.UTF-8
 PG_DEFAULT_REGRESS_LOCALE=$(shell uname | grep -q 'Darwin' && echo 'en_US.UTF-8'  || echo 'C.UTF-8')
