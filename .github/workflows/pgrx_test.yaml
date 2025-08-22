@@ -70,5 +70,5 @@ jobs:
     - name: package
       id: package
       run: |
-        cd pgvectorscale/pgvectorscale
+        cd pgvectorscale
         RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f" cargo pgrx package --features pg${{ matrix.pg.major }}
