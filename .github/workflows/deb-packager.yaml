@@ -5,10 +5,6 @@ on:
       tag:
         description: 'Tag'
         required: true
-        default: ''
-      TAG_GIT_REF:
-        description: 'Tag git Ref (leave empty for same as Tag)'
-        required: false
         default: '0.8.0'
 
 jobs:
@@ -24,8 +20,8 @@ jobs:
         platform:
           - type: amd64
             runs_on: ubuntu-latest
-#          - type: arm64
-#            runs_on: cloud-image-runner-arm64
+          - type: arm64
+            runs_on: ubuntu-latest  # cloud-image-runner-arm64
 
     env:
       PG_SRC_DIR: pgbuild
@@ -34,7 +30,6 @@ jobs:
       PG_CONFIG_PATH: postgresql/bin/pg_config
       TAG: ${{ github.event.inputs.tag }}
       TAG_DIR: pgvectorscale
-      TAG_GIT_REF: ${{ github.event.inputs.TAG_GIT_REF == '' && github.event.inputs.tag || github.event.inputs.TAG_GIT_REF}}
 
     steps:
 #    - name: Install package_cloud
@@ -65,8 +60,8 @@ jobs:
     - name: Checkout ${{ env.TAG }}
       uses: actions/checkout@v4
       with:
-        repository: timescale/pgvectorscale
-        ref: '${{ env.TAG_GIT_REF }}'
+        repository: choronz/pgvectorscale
+        ref: '${{ env.TAG }}'
         path: ${{ env.TAG_DIR }}
 
     - name: Install pgrx
