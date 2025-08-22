@@ -8,11 +8,11 @@ inputs:
     default: .
   grcov-version:
     description: "grcov version"
-    default: 0.8.18
+    default: 0.10.3
   pgrx-version:
     description: "pgrx version"
     # Default version currently isn't unused
-    # default: 0.9.8
+    # default: 0.12.9
 
 runs:
   using: "composite"
