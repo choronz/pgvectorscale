@@ -6,6 +6,15 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[build]
+rustflags = ["-C", "target-cpu=native",
+             "-C", "target-feature=+avx512f",
+             "-C", "opt-level=3"]
+#             "-C", "codegen-units=1",
+#             "-C", "lto=fat",
+#             "-C", "embed-bitcode=no"]
+
+
 [[bin]]
 name = "pgrx_embed_vectorscale"
 path = "./src/bin/pgrx_embed.rs"
