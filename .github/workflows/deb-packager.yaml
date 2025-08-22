@@ -74,7 +74,7 @@ jobs:
       id: debbuild
       run: |
         export PATH=~/${{ env.PG_INSTALL_DIR }}/bin:$PATH
-        (cd ${{ env.TAG_DIR }} && make package)
+        (cd ${{ env.TAG_DIR }} && make --eval="print-%: ; @echo $*=$($*)" package)
         bash scripts/package-deb.sh "${{ env.TAG }}" "${PWD}/${{ env.TAG_DIR }}" "$RUNNER_OS" "${{ matrix.pg.major }}"
 
     # Use a GH artifact, then we can make use of the (quite limited) GH API https://docs.github.com/en/rest/actions/artifacts
