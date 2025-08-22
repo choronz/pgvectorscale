@@ -20,8 +20,8 @@ jobs:
         platform:
           - type: amd64
             runs_on: ubuntu-latest
-          - type: arm64
-            runs_on: ubuntu-latest  # cloud-image-runner-arm64
+#          - type: arm64
+#            runs_on: ubuntu-latest  # cloud-image-runner-arm64
 
     env:
       PG_SRC_DIR: pgbuild
@@ -40,8 +40,8 @@ jobs:
 #        sudo gem install rainbow -v 2.2.2 --no-doc
 #        sudo gem install package_cloud --no-doc
 
-    - name: Checkout pgvectorscale
-      uses: actions/checkout@v4
+#    - name: Checkout pgvectorscale
+#      uses: actions/checkout@v4
 
     - name: Install Linux Packages
       uses: ./.github/actions/install-packages
@@ -59,10 +59,10 @@ jobs:
 
     - name: Checkout pgvectorscale  # Checkout ${{ env.TAG }}
       uses: actions/checkout@v4
-#      with:
-#        repository: choronz/pgvectorscale
-#        ref: main
-#        path: ${{ env.TAG_DIR }}
+      with:
+        repository: choronz/pgvectorscale
+        ref: main
+        path: ${{ env.TAG_DIR }}
 
     - name: Install pgrx
       uses: ./.github/actions/install-pgrx
