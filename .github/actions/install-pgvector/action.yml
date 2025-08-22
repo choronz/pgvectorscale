@@ -33,5 +33,5 @@ runs:
       shell: bash
       run: |
         export PATH=${{ inputs.pg-install-dir }}/bin:$PATH
-        make OPTFLAGS="-march=native -mprefer-vector-width=512"
         make -C ${{ inputs.pgvector-src-dir }}/pgvector install
+        # make OPTFLAGS="-march=native -mprefer-vector-width=512"
