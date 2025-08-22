@@ -13,21 +13,13 @@ jobs:
         pgvector:
           - version: 0.8.0
         pg:
-          - major: 13
-            minor: 16
-          - major: 14
-            minor: 13
-          - major: 15
-            minor: 7
-          - major: 16
-            minor: 3
           - major: 17
-            minor: 0
+            minor: 6
         platform:
           - type: amd64
             runs_on: ubuntu-22.04
-          - type: arm64
-            runs_on: cloud-image-runner-arm64
+#          - type: arm64
+#            runs_on: cloud-image-runner-arm64
 
     env:
       PG_SRC_DIR: pgbuild

@@ -68,12 +68,12 @@ install-debug: init-pgrx
 
 .PHONY: install-release
 install-release: init-pgrx
-	cd $(RUST_SRCDIR) && cargo pgrx install --release --features pg${PG_VERSION}
+	cd $(RUST_SRCDIR) && RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f" cargo pgrx install --release --features pg${PG_VERSION}
 
 
 .PHONY: package
 package: init-pgrx
-	cd $(RUST_SRCDIR) && cargo pgrx package --features pg${PG_VERSION}
+	cd $(RUST_SRCDIR) && RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f" cargo pgrx package --features pg${PG_VERSION}
 
 .PHONY: shellcheck
 shellcheck:

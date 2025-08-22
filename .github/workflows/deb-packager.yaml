@@ -9,7 +9,7 @@ on:
       TAG_GIT_REF:
         description: 'Tag git Ref (leave empty for same as Tag)'
         required: false
-        default: ''
+        default: '0.8.0'
 
 jobs:
   packager:
@@ -19,21 +19,13 @@ jobs:
       fail-fast: false
       matrix:
         pg:
-          - major: 13
-            minor: 16
-          - major: 14
-            minor: 13
-          - major: 15
-            minor: 7
-          - major: 16
-            minor: 3
           - major: 17
-            minor: 0
+            minor: 6
         platform:
           - type: amd64
             runs_on: ubuntu-latest
-          - type: arm64
-            runs_on: cloud-image-runner-arm64
+#          - type: arm64
+#            runs_on: cloud-image-runner-arm64
 
     env:
       PG_SRC_DIR: pgbuild
@@ -45,13 +37,13 @@ jobs:
       TAG_GIT_REF: ${{ github.event.inputs.TAG_GIT_REF == '' && github.event.inputs.tag || github.event.inputs.TAG_GIT_REF}}
 
     steps:
-    - name: Install package_cloud
-      run: |
-        sudo apt-get -qq update
-        sudo apt-get -qq install gcc g++ make ruby-all-dev
-        sudo gem install rake --no-doc
-        sudo gem install rainbow -v 2.2.2 --no-doc
-        sudo gem install package_cloud --no-doc
+#    - name: Install package_cloud
+#      run: |
+#        sudo apt-get -qq update
+#        sudo apt-get -qq install gcc g++ make ruby-all-dev
+#        sudo gem install rake --no-doc
+#        sudo gem install rainbow -v 2.2.2 --no-doc
+#        sudo gem install package_cloud --no-doc
 
     - name: Checkout pgvectorscale
       uses: actions/checkout@v4
@@ -98,9 +90,9 @@ jobs:
         name: pgvectorscale-${{ env.TAG }}-pg${{ matrix.pg.major }}-${{ matrix.platform.type }}
         path: pkgdump/pgvectorscale-*${{ env.TAG }}*.deb
 
-    - name: Upload to packagecloud
-      env:
-        PACKAGECLOUD_TOKEN: ${{ secrets.IO_PACKAGECLOUD_TOKEN }}
-      run: |
-        source /etc/os-release
-        package_cloud push timescale/timescaledb/$ID/$VERSION_CODENAME pkgdump/pgvectorscale-*${{ env.TAG }}*.deb
+#    - name: Upload to packagecloud
+#      env:
+#        PACKAGECLOUD_TOKEN: ${{ secrets.IO_PACKAGECLOUD_TOKEN }}
+#      run: |
+#        source /etc/os-release
+#        package_cloud push timescale/timescaledb/$ID/$VERSION_CODENAME pkgdump/pgvectorscale-*${{ env.TAG }}*.deb
