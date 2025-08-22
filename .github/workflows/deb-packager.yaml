@@ -32,16 +32,16 @@ jobs:
       TAG_DIR: pgvectorscale
 
     steps:
-#    - name: Install package_cloud
-#      run: |
-#        sudo apt-get -qq update
-#        sudo apt-get -qq install gcc g++ make ruby-all-dev
-#        sudo gem install rake --no-doc
+    - name: Install package_cloud
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get -qq install gcc g++ make
+#        sudo gem install rake --no-doc     ruby-all-dev
 #        sudo gem install rainbow -v 2.2.2 --no-doc
 #        sudo gem install package_cloud --no-doc
 
-#    - name: Checkout pgvectorscale
-#      uses: actions/checkout@v4
+    - name: Checkout pgvectorscale
+      uses: actions/checkout@v4
 
     - name: Install Linux Packages
       uses: ./.github/actions/install-packages
@@ -57,12 +57,12 @@ jobs:
         pg-src-dir: ~/${{ env.PG_SRC_DIR }}
         pg-install-dir: ~/${{ env.PG_INSTALL_DIR }}
 
-    - name: Checkout pgvectorscale  # Checkout ${{ env.TAG }}
-      uses: actions/checkout@v4
-      with:
-        repository: choronz/pgvectorscale
-        ref: main
-        path: ${{ env.TAG_DIR }}
+#    - name: Checkout pgvectorscale  # Checkout ${{ env.TAG }}
+#      uses: actions/checkout@v4
+#      with:
+#        repository: choronz/pgvectorscale
+#        ref: main
+#        path: ${{ env.TAG_DIR }}
 
     - name: Install pgrx
       uses: ./.github/actions/install-pgrx
