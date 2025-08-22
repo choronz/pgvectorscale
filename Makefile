@@ -8,7 +8,7 @@ EXTENSION=vectorscale
 PG_VERSION = $(shell ${PG_CONFIG} --version | awk -F'[ \.]' '{print $$2}')
 ##TODO error out if this is not PG14???
 PGRX_HOME?= ${HOME}/.pgrx
-PGRX_VERSION=0.9.8
+PGRX_VERSION=0.12.9
 VECTOR_VERSION?=$(shell sed -n 's/^[[:space:]]*version[[:space:]]*=[[:space:]]*"\(.*\)"/\1/p' pgvectorscale/Cargo.toml)
 PG_DATA=${PGRX_HOME}/data-${PG_VERSION}
 
@@ -25,6 +25,7 @@ PG_REGRESS_OPTS_EXTRA=--create-role=superuser,tsdbadmin,test_role_1  --launcher=
 export TEST_OUTPUT_DIR:=$(ROOTDIR)/test_output
 export PG_ABS_SRCDIR:=$(ROOTDIR)/test
 export TEST_DBNAME:=regression
+export RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f"
 
 ### default collation settings on Cloud is C.UTF-8
 PG_DEFAULT_REGRESS_LOCALE=$(shell uname | grep -q 'Darwin' && echo 'en_US.UTF-8'  || echo 'C.UTF-8')
@@ -66,14 +67,14 @@ $(PG_DATA):
 install-debug: init-pgrx
 	cd $(RUST_SRCDIR) && cargo pgrx install --features pg${PG_VERSION}
 
+
 .PHONY: install-release
 install-release: init-pgrx
-	cd $(RUST_SRCDIR) && RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f" cargo pgrx install --release --features pg${PG_VERSION}
-
+	cd $(RUST_SRCDIR) && cargo pgrx install --release --features pg${PG_VERSION}
 
 .PHONY: package
 package: init-pgrx
-	cd $(RUST_SRCDIR) && RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f" cargo pgrx package --features pg${PG_VERSION}
+	cd $(RUST_SRCDIR) && cargo pgrx package --features pg${PG_VERSION}
 
 .PHONY: shellcheck
 shellcheck:

@@ -35,8 +35,8 @@ jobs:
     - name: Install package_cloud
       run: |
         sudo apt-get -qq update
-        sudo apt-get -qq install gcc g++ make
-#        sudo gem install rake --no-doc     ruby-all-dev
+        sudo apt-get -qq install make
+#        sudo gem install rake --no-doc     ruby-all-dev gcc g++
 #        sudo gem install rainbow -v 2.2.2 --no-doc
 #        sudo gem install package_cloud --no-doc
 
