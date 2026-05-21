@@ -19,8 +19,8 @@ jobs:
         platform:
           - type: amd64
             runs_on: ubuntu-latest
-          - type: arm64
-            runs_on: cloud-image-runner-arm64
+          # - type: arm64
+          #   runs_on: cloud-image-runner-arm64
 
     env:
       PG_SRC_DIR: pgbuild
