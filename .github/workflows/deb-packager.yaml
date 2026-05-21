@@ -42,10 +42,10 @@ jobs:
     - name: Install package_cloud
       run: |
         sudo apt-get -qq update
-        sudo apt-get -qq install gcc g++ make ruby-all-dev
-        sudo gem install rake --no-doc
-        sudo gem install rainbow -v 2.2.2 --no-doc
-        sudo gem install package_cloud --no-doc
+        sudo apt-get -qq install gcc g++ make # ruby-all-dev
+        # sudo gem install rake --no-doc
+        # sudo gem install rainbow -v 2.2.2 --no-doc
+        # sudo gem install package_cloud --no-doc
 
     - name: Checkout pgvectorscale
       uses: actions/checkout@v4
@@ -67,7 +67,7 @@ jobs:
     - name: Checkout ${{ env.TAG }}
       uses: actions/checkout@v4
       with:
-        repository: timescale/pgvectorscale
+        repository: choronz/pgvectorscale
         ref: '${{ env.TAG_GIT_REF }}'
         path: ${{ env.TAG_DIR }}
 
